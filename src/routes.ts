@@ -8,15 +8,19 @@ import { ensureAuthenticate } from './middleware/ensureAuthenticate';
 
 const router = Router();
 
-router.post('/authenticate', new AuthenticateUserController().handle);
+router.post('/api/authenticate', new AuthenticateUserController().handle);
 
 router.post(
-  '/messages',
+  '/api/messages',
   ensureAuthenticate,
   new CreateMessageController().handle,
 );
-router.get('/messages/last3', new Get3LastMessagesController().handle);
+router.get('/api/messages/last3', new Get3LastMessagesController().handle);
 
-router.get('/profile', ensureAuthenticate, new ProfileUserController().handle);
+router.get(
+  '/api/profile',
+  ensureAuthenticate,
+  new ProfileUserController().handle,
+);
 
 export { router };
